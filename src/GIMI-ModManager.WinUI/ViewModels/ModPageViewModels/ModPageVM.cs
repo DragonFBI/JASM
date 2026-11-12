@@ -136,15 +136,15 @@ public partial class ModPageVM : ObservableRecipient
     }
 
     /// <summary>
-    /// If the mod has exactly one file, download and install it without waiting for clicks,
-    /// then close this window once it's installed. Mods with several files still let you pick.
+    /// Download and install the mod without waiting for clicks, then close this window once it's
+    /// installed. If the mod has several files, the newest upload is picked.
     /// </summary>
     private async Task AutoDownloadAndInstallAsync()
     {
-        if (_ct.IsCancellationRequested || ModFileInfos.Count != 1)
+        if (_ct.IsCancellationRequested || ModFileInfos.Count == 0)
             return;
 
-        var file = ModFileInfos[0];
+        var file = ModFileInfos.OrderByDescending(f => f.DateAdded).First();
 
         // Let the pending UI updates from initialization finish first
         await _dispatcherQueue.EnqueueAsync(() => true);

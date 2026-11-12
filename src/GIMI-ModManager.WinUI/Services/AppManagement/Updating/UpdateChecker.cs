@@ -57,7 +57,10 @@ public sealed class UpdateChecker
         }
 
 
-        InitCheckerLoop(_cancellationTokenSource.Token);
+        // Update checking is turned off in this personal build: the original project is no longer
+        // updated, and "updating" would replace this build (and its changes) with the original.
+        // To turn it back on, restore the line below.
+        // InitCheckerLoop(_cancellationTokenSource.Token);
     }
 
     public async Task IgnoreCurrentVersionAsync()
