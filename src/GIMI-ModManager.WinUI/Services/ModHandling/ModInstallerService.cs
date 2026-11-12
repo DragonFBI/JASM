@@ -81,6 +81,12 @@ public class InstallOptions
 {
     public Uri? ModUrl { get; set; }
     public Guid? ExistingModIdToUpdate { get; set; }
+
+    /// <summary>
+    /// When true, the installer adds the mod by itself once the mod folder is found and the
+    /// GameBanana info (name, author, image) has loaded. It still stops and asks on duplicates.
+    /// </summary>
+    public bool AutoAdd { get; set; }
 }
 
 public sealed class InstallMonitor : IDisposable

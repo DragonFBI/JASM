@@ -1,6 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using CommunityToolkitWrapper;
 using GIMI_ModManager.Core.Contracts.Entities;
 using GIMI_ModManager.Core.Contracts.Services;
 using GIMI_ModManager.Core.GamesService.Interfaces;
@@ -73,6 +74,7 @@ public partial class ModPageVM : ObservableRecipient
         {
             await InternalInitialize();
             Initializing = "false";
+            await AutoDownloadAndInstallAsync();
         }
         catch (OperationCanceledException)
         {
@@ -131,6 +133,30 @@ public partial class ModPageVM : ObservableRecipient
         }
 
         IsWindowBusy = false;
+    }
+
+    /// <summary>
+    /// If the mod has exactly one file, download and install it without waiting for clicks,
+    /// then close this window once it's installed. Mods with several files still let you pick.
+    /// </summary>
+    private async Task AutoDownloadAndInstallAsync()
+    {
+        if (_ct.IsCancellationRequested || ModFileInfos.Count != 1)
+            return;
+
+        var file = ModFileInfos[0];
+
+        // Let the pending UI updates from initialization finish first
+        await _dispatcherQueue.EnqueueAsync(() => true);
+
+        if (file.Status == ModFileInfoVm.InstallStatus.NotStarted && CanStartDownload(file))
+            await StartDownload(file);
+
+        if (file.Status == ModFileInfoVm.InstallStatus.Downloaded && CanInstall(file))
+            await StartInstall(file);
+
+        if (file.Status == ModFileInfoVm.InstallStatus.Installed)
+            _window.Close();
     }
 
     private Task LogErrorAndClose(Exception e)
@@ -281,6 +307,7 @@ public partial class ModPageVM : ObservableRecipient
                     setup: options =>
                     {
                         options.ModUrl = modUrl;
+                        options.AutoAdd = true;
                     }).ConfigureAwait(false);
 
                 return await task.WaitForCloseAsync(_ct).ConfigureAwait(false);

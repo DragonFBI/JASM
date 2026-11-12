@@ -164,6 +164,8 @@ public partial class ModInstallerVM : ObservableRecipient, INavigationAware, IDi
         EnableThisMod = !_characterModList.Character.IsMultiMod && installerSettings.EnableModOnInstall;
         AlwaysOnTop = installerSettings.ModInstallerWindowOnTop;
 
+        var rootFolderFound = false;
+
         await Task.Run(async () =>
         {
             _existingModToUpdate = _installOptions?.ExistingModIdToUpdate is not null
@@ -173,6 +175,7 @@ public partial class ModInstallerVM : ObservableRecipient, INavigationAware, IDi
             var modDir = _modInstallation.AutoSetModRootFolder();
             if (modDir is not null)
             {
+                rootFolderFound = true;
                 var fileSystemItem = RootFolder.First().GetByPath(modDir.FullName);
                 if (fileSystemItem is not null)
                     dispatcherQueue.EnqueueAsync(async () =>
@@ -248,6 +251,53 @@ public partial class ModInstallerVM : ObservableRecipient, INavigationAware, IDi
             if (options?.ModUrl is not null)
                 dispatcherQueue.TryEnqueue(() => { ModUrl = options.ModUrl.ToString(); });
         }).ConfigureAwait(false);
+
+        if (_installOptions?.AutoAdd == true && _installOptions.ExistingModIdToUpdate is null && rootFolderFound)
+            _ = Task.Run(AutoAddWhenReadyAsync);
+    }
+
+    /// <summary>
+    /// Waits until the GameBanana info (name, author, preview image) has finished loading,
+    /// then adds the mod as if "Add mod" was clicked. If a mod with the same name exists,
+    /// the normal duplicate dialog is shown so you can choose what to do.
+    /// </summary>
+    private async Task AutoAddWhenReadyAsync()
+    {
+        try
+        {
+            var dispatcherQueue = _dispatcherQueue;
+            if (dispatcherQueue is null)
+                return;
+
+            var sawRetrieving = false;
+            var start = DateTime.UtcNow;
+            while (DateTime.UtcNow - start < TimeSpan.FromSeconds(20) && !_cts.IsCancellationRequested)
+            {
+                await Task.Delay(250).ConfigureAwait(false);
+
+                var (url, retrieving, hasImage) = await dispatcherQueue.EnqueueAsync(() =>
+                    (ModUrl, IsRetrievingModInfo, ModPreviewImagePath != _placeholderImageUri)).ConfigureAwait(false);
+
+                if (retrieving)
+                    sawRetrieving = true;
+
+                if (!url.IsNullOrEmpty() && !retrieving && (sawRetrieving || hasImage))
+                    break;
+            }
+
+            if (_cts.IsCancellationRequested)
+                return;
+
+            await dispatcherQueue.EnqueueAsync(async () =>
+            {
+                if (canAddMod())
+                    await AddModAsync();
+            }).ConfigureAwait(false);
+        }
+        catch (Exception e)
+        {
+            _logger.Error(e, "Failed to automatically add mod");
+        }
     }
 
     private async void OnPropertyChanged(object? sender, PropertyChangedEventArgs e)
