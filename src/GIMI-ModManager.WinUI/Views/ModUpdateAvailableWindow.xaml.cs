@@ -18,11 +18,11 @@ public sealed partial class ModUpdateAvailableWindow : WindowEx
 
     private CancellationTokenSource? _cts;
 
-    public ModUpdateAvailableWindow(Guid notificationId)
+    public ModUpdateAvailableWindow(Guid notificationId, bool autoInstall = false)
     {
         _cts = new CancellationTokenSource();
 
-        ViewModel = new ModUpdateVM(notificationId, this, _cts.Token);
+        ViewModel = new ModUpdateVM(notificationId, this, _cts.Token, autoInstall);
         InitializeComponent();
 
         if (Content is FrameworkElement rootElement)

@@ -1,6 +1,7 @@
 ﻿using Windows.Storage;
 using Windows.Win32;
 using Windows.Win32.Media.Audio;
+using CommunityToolkitWrapper;
 using GIMI_ModManager.Core.Contracts.Entities;
 using GIMI_ModManager.Core.Services;
 using GIMI_ModManager.WinUI.Services.AppManagement;
@@ -196,23 +197,71 @@ public class ModDragAndDropService
     }
 
 
-    public async Task AddModFromUrlAsync(ICharacterModList modList, Uri uri)
+    // One queue per character: links dropped while another is installing wait their turn
+    private readonly Dictionary<string, SemaphoreSlim> _urlDropQueues = new();
+
+    public Task AddModFromUrlAsync(ICharacterModList modList, Uri uri)
     {
         var windowKey = $"ModPage_{modList.Character.InternalName}";
-        if (_windowManagerService.GetWindow(windowKey) is { } window)
-        {
-            PInvoke.PlaySound("SystemAsterisk", null,
-                SND_FLAGS.SND_ASYNC | SND_FLAGS.SND_ALIAS | SND_FLAGS.SND_NODEFAULT);
 
-            App.MainWindow.DispatcherQueue.TryEnqueue(() => window.Activate());
-            return;
+        SemaphoreSlim queue;
+        lock (_urlDropQueues)
+        {
+            if (_urlDropQueues.TryGetValue(windowKey, out var existingQueue))
+            {
+                queue = existingQueue;
+            }
+            else
+            {
+                queue = new SemaphoreSlim(1, 1);
+                _urlDropQueues[windowKey] = queue;
+            }
         }
 
+        if (queue.CurrentCount == 0)
+        {
+            _notificationManager.ShowNotification("Mod queued",
+                $"It will install after the current mod for {modList.Character.DisplayName} is done.",
+                TimeSpan.FromSeconds(4));
+        }
 
-        var modWindow = new GbModPageWindow(uri, modList.Character);
-        _windowManagerService.CreateWindow(modWindow, identifier: windowKey);
-        await Task.Delay(100);
-        modWindow.BringToFront();
+        // Don't make the caller wait for the whole install, so more links can be dropped meanwhile
+        _ = Task.Run(() => OpenModPageWhenFreeAsync(queue, windowKey, modList, uri));
+        return Task.CompletedTask;
+    }
+
+    private async Task OpenModPageWhenFreeAsync(SemaphoreSlim queue, string windowKey, ICharacterModList modList,
+        Uri uri)
+    {
+        await queue.WaitAsync().ConfigureAwait(false);
+        try
+        {
+            // Wait for a window that was opened some other way to close first
+            while (_windowManagerService.GetWindow(windowKey) is not null)
+                await Task.Delay(500).ConfigureAwait(false);
+
+            var closed = new TaskCompletionSource();
+            await App.MainWindow.DispatcherQueue.EnqueueAsync(async () =>
+            {
+                var modWindow = new GbModPageWindow(uri, modList.Character);
+                modWindow.Closed += (_, _) => closed.TrySetResult();
+                _windowManagerService.CreateWindow(modWindow, identifier: windowKey);
+                await Task.Delay(100);
+                modWindow.BringToFront();
+            }).ConfigureAwait(false);
+
+            await closed.Task.ConfigureAwait(false);
+        }
+        catch (Exception e)
+        {
+            _logger.Error(e, "Failed to open mod page for {Url}", uri);
+            App.MainWindow.DispatcherQueue.TryEnqueue(() =>
+                _notificationManager.ShowNotification("Failed to open mod page", e.Message, TimeSpan.FromSeconds(8)));
+        }
+        finally
+        {
+            queue.Release();
+        }
     }
 
     public class DragAndDropFinishedArgs : EventArgs

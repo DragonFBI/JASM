@@ -1,24 +1,41 @@
-[
+﻿[
   {
     "Keys": [
-      "trailblazer"
+      "Trailblazer • Caelus"
     ],
     "ReleaseDate": "2023-04-26T00:00:00",
-    "Image": "trailblazer.gif",
+    "Image": "caelus.png",
     "Rarity": 5,
     "Element": "Adaptive",
     "Class": "Adaptive",
     "Region": [
       "Astral Express"
     ],
-    "ModFilesName": "trailblazer",
+    "ModFilesName": "Caelus",
     "InGameSkins": [],
-    "InternalName": "Trailblazer",
-    "DisplayName": "Trailblazer"
+    "InternalName": "Caelus",
+    "DisplayName": "Trailblazer • Caelus"
   },
   {
     "Keys": [
-      "arlan"
+      "Trailblazer • Stelle"
+    ],
+    "ReleaseDate": "2023-04-26T00:00:00",
+    "Image": "stelle.png",
+    "Rarity": 5,
+    "Element": "Adaptive",
+    "Class": "Adaptive",
+    "Region": [
+      "Astral Express"
+    ],
+    "ModFilesName": "Stelle",
+    "InGameSkins": [],
+    "InternalName": "Stelle",
+    "DisplayName": "Trailblazer • Stelle"
+  },
+  {
+    "Keys": [
+      "Arlan"
     ],
     "ReleaseDate": "2023-04-26T00:00:00",
     "Image": "arlan.png",
@@ -35,7 +52,7 @@
   },
   {
     "Keys": [
-      "asta"
+      "Asta"
     ],
     "ReleaseDate": "2023-04-26T00:00:00",
     "Image": "asta.png",
@@ -52,7 +69,7 @@
   },
   {
     "Keys": [
-      "bailu"
+      "Bailu"
     ],
     "ReleaseDate": "2023-04-26T00:00:00",
     "Image": "bailu.png",
@@ -69,7 +86,7 @@
   },
   {
     "Keys": [
-      "blade"
+      "Blade"
     ],
     "ReleaseDate": "2023-07-19T00:00:00",
     "Image": "blade.png",
@@ -86,7 +103,7 @@
   },
   {
     "Keys": [
-      "bronya"
+      "Bronya"
     ],
     "ReleaseDate": "2023-04-26T00:00:00",
     "Image": "bronya.png",
@@ -103,7 +120,7 @@
   },
   {
     "Keys": [
-      "clara"
+      "Clara"
     ],
     "ReleaseDate": "2023-04-26T00:00:00",
     "Image": "clara.png",
@@ -120,7 +137,7 @@
   },
   {
     "Keys": [
-      "danheng"
+      "Dan Heng"
     ],
     "ReleaseDate": "2023-04-26T00:00:00",
     "Image": "danheng.png",
@@ -137,7 +154,7 @@
   },
   {
     "Keys": [
-      "danheng-IL"
+      "Dan Heng • Imbibitor Lunae"
     ],
     "ReleaseDate": "2023-08-30T00:00:00",
     "Image": "DHIL.png",
@@ -150,28 +167,11 @@
     "ModFilesName": "Dan Heng IL",
     "InGameSkins": [],
     "InternalName": "Dan Heng IL",
-    "DisplayName": "Dan Heng - IL"
+    "DisplayName": "Dan Heng • Imbibitor Lunae"
   },
   {
     "Keys": [
-      "danheng-PT"
-    ],
-    "ReleaseDate": "2025-10-15T00:00:00",
-    "Image": "DHPT.png",
-    "Rarity": 5,
-    "Element": "Physical",
-    "Class": "Preservation",
-    "Region": [
-      "Amphoreus"
-    ],
-    "ModFilesName": "Dan Heng PT",
-    "InGameSkins": [],
-    "InternalName": "Dan Heng PT",
-    "DisplayName": "Dan Heng - PT"
-  },
-  {
-    "Keys": [
-      "fu xuan"
+      "Fu Xuan"
     ],
     "ReleaseDate": "2023-09-20T00:00:00",
     "Image": "fuxuan.png",
@@ -188,7 +188,7 @@
   },
   {
     "Keys": [
-      "gepard"
+      "Gepard"
     ],
     "ReleaseDate": "2023-04-26T00:00:00",
     "Image": "gepard.png",
@@ -205,7 +205,7 @@
   },
   {
     "Keys": [
-      "guinaifen"
+      "Guinaifen"
     ],
     "ReleaseDate": "2023-10-27T00:00:00",
     "Image": "guinaifen.png",
@@ -222,7 +222,7 @@
   },
   {
     "Keys": [
-      "herta"
+      "Herta"
     ],
     "ReleaseDate": "2023-04-26T00:00:00",
     "Image": "herta.png",
@@ -239,7 +239,7 @@
   },
   {
     "Keys": [
-      "himeko"
+      "Himeko"
     ],
     "ReleaseDate": "2023-04-26T00:00:00",
     "Image": "himeko.png",
@@ -256,7 +256,7 @@
   },
   {
     "Keys": [
-      "hook"
+      "Hook"
     ],
     "ReleaseDate": "2023-04-26T00:00:00",
     "Image": "hook.png",
@@ -273,7 +273,7 @@
   },
   {
     "Keys": [
-      "jingyuan"
+      "Jing Yuan"
     ],
     "ReleaseDate": "2023-05-17T00:00:00",
     "Image": "jingyuan.png",
@@ -290,7 +290,7 @@
   },
   {
     "Keys": [
-      "jingliu"
+      "Jingliu"
     ],
     "ReleaseDate": "2023-10-11T00:00:00",
     "Image": "jingliu.png",
@@ -307,7 +307,7 @@
   },
   {
     "Keys": [
-      "kafka"
+      "Kafka"
     ],
     "ReleaseDate": "2023-08-09T00:00:00",
     "Image": "kafka.png",
@@ -324,7 +324,7 @@
   },
   {
     "Keys": [
-      "luka"
+      "Luka"
     ],
     "ReleaseDate": "2023-08-09T00:00:00",
     "Image": "luka.png",
@@ -341,7 +341,7 @@
   },
   {
     "Keys": [
-      "luocha"
+      "Luocha"
     ],
     "ReleaseDate": "2023-06-28T00:00:00",
     "Image": "luocha.png",
@@ -358,7 +358,7 @@
   },
   {
     "Keys": [
-      "lynx"
+      "Lynx"
     ],
     "ReleaseDate": "2023-09-20T00:00:00",
     "Image": "lynx.png",
@@ -375,7 +375,7 @@
   },
   {
     "Keys": [
-      "march7"
+      "March 7th"
     ],
     "ReleaseDate": "2023-04-26T00:00:00",
     "Image": "march7.png",
@@ -405,7 +405,7 @@
   },
   {
     "Keys": [
-      "natasha"
+      "Natasha"
     ],
     "ReleaseDate": "2023-04-26T00:00:00",
     "Image": "natasha.png",
@@ -422,7 +422,7 @@
   },
   {
     "Keys": [
-      "pela"
+      "Pela"
     ],
     "ReleaseDate": "2023-04-26T00:00:00",
     "Image": "pela.png",
@@ -439,7 +439,7 @@
   },
   {
     "Keys": [
-      "qingque"
+      "Qingque"
     ],
     "ReleaseDate": "2023-04-26T00:00:00",
     "Image": "qingque.png",
@@ -456,7 +456,7 @@
   },
   {
     "Keys": [
-      "sampo"
+      "Sampo"
     ],
     "ReleaseDate": "2023-04-26T00:00:00",
     "Image": "sampo.png",
@@ -473,7 +473,7 @@
   },
   {
     "Keys": [
-      "seele"
+      "Seele"
     ],
     "ReleaseDate": "2023-04-26T00:00:00",
     "Image": "seele.png",
@@ -490,7 +490,7 @@
   },
   {
     "Keys": [
-      "serval"
+      "Serval"
     ],
     "ReleaseDate": "2023-04-26T00:00:00",
     "Image": "serval.png",
@@ -507,7 +507,7 @@
   },
   {
     "Keys": [
-      "silverwolf"
+      "Silver Wolf"
     ],
     "ReleaseDate": "2023-06-07T00:00:00",
     "Image": "silverwolf.png",
@@ -524,7 +524,7 @@
   },
   {
     "Keys": [
-      "sushang"
+      "Sushang"
     ],
     "ReleaseDate": "2023-04-26T00:00:00",
     "Image": "sushang.png",
@@ -541,7 +541,7 @@
   },
   {
     "Keys": [
-      "tingyun"
+      "Tingyun"
     ],
     "ReleaseDate": "2023-04-26T00:00:00",
     "Image": "tingyun.png",
@@ -558,7 +558,7 @@
   },
   {
     "Keys": [
-      "topaz"
+      "Topaz & Numby"
     ],
     "ReleaseDate": "2023-10-27T00:00:00",
     "Image": "topaz.png",
@@ -571,11 +571,11 @@
     "ModFilesName": "Topaz",
     "InGameSkins": [],
     "InternalName": "Topaz",
-    "DisplayName": "Topaz and Numby"
+    "DisplayName": "Topaz & Numby"
   },
   {
     "Keys": [
-      "welt"
+      "Welt"
     ],
     "ReleaseDate": "2023-04-26T00:00:00",
     "Image": "welt.png",
@@ -592,7 +592,7 @@
   },
   {
     "Keys": [
-      "yanqing"
+      "Yanqing"
     ],
     "ReleaseDate": "2023-04-26T00:00:00",
     "Image": "yanqing.png",
@@ -609,7 +609,7 @@
   },
   {
     "Keys": [
-      "yukong"
+      "Yukong"
     ],
     "ReleaseDate": "2023-06-28T00:00:00",
     "Image": "yukong.png",
@@ -626,7 +626,7 @@
   },
   {
     "Keys": [
-      "argenti"
+      "Argenti"
     ],
     "ReleaseDate": "2023-12-06T00:00:00",
     "Image": "argenti.png",
@@ -643,7 +643,7 @@
   },
   {
     "Keys": [
-      "drratio"
+      "Dr. Ratio"
     ],
     "ReleaseDate": "2024-01-17T00:00:00",
     "Image": "drratio.png",
@@ -660,7 +660,7 @@
   },
   {
     "Keys": [
-      "hanya"
+      "Hanya"
     ],
     "ReleaseDate": "2023-12-06T00:00:00",
     "Image": "hanya.png",
@@ -677,7 +677,7 @@
   },
   {
     "Keys": [
-      "huohuo"
+      "Huohuo"
     ],
     "ReleaseDate": "2023-12-06T00:00:00",
     "Image": "huohuo.png",
@@ -694,7 +694,7 @@
   },
   {
     "Keys": [
-      "ruanmei"
+      "Ruan Mei"
     ],
     "ReleaseDate": "2023-12-27T00:00:00",
     "Image": "ruanmei.png",
@@ -711,7 +711,7 @@
   },
   {
     "Keys": [
-      "xueyi"
+      "Xueyi"
     ],
     "ReleaseDate": "2023-12-27T00:00:00",
     "Image": "xueyi.png",
@@ -728,7 +728,7 @@
   },
   {
     "Keys": [
-      "blackswan"
+      "Black Swan"
     ],
     "ReleaseDate": "2024-02-06T00:00:00",
     "Image": "blackswan.png",
@@ -745,7 +745,7 @@
   },
   {
     "Keys": [
-      "sparkle"
+      "Sparkle"
     ],
     "ReleaseDate": "2024-02-29T00:00:00",
     "Image": "sparkle.png",
@@ -762,7 +762,7 @@
   },
   {
     "Keys": [
-      "misha"
+      "Misha"
     ],
     "ReleaseDate": "2024-02-29T00:00:00",
     "Image": "misha.png",
@@ -779,7 +779,7 @@
   },
   {
     "Keys": [
-      "acheron"
+      "Acheron"
     ],
     "ReleaseDate": "2024-03-27T00:00:00",
     "Image": "acheron.png",
@@ -796,7 +796,7 @@
   },
   {
     "Keys": [
-      "aventurine"
+      "Aventurine"
     ],
     "ReleaseDate": "2024-03-27T00:00:00",
     "Image": "aventurine.png",
@@ -813,7 +813,7 @@
   },
   {
     "Keys": [
-      "gallagher"
+      "Gallagher"
     ],
     "ReleaseDate": "2024-03-27T00:00:00",
     "Image": "gallagher.png",
@@ -830,7 +830,7 @@
   },
   {
     "Keys": [
-      "robin"
+      "Robin"
     ],
     "ReleaseDate": "2024-05-07T00:00:00",
     "Image": "robin.png",
@@ -847,7 +847,7 @@
   },
   {
     "Keys": [
-      "boothill"
+      "Boothill"
     ],
     "ReleaseDate": "2024-05-07T00:00:00",
     "Image": "boothill.png",
@@ -864,7 +864,7 @@
   },
   {
     "Keys": [
-      "firefly"
+      "Firefly"
     ],
     "ReleaseDate": "2024-06-18T00:00:00",
     "Image": "firefly.png",
@@ -888,7 +888,7 @@
   },
   {
     "Keys": [
-      "jade"
+      "Jade"
     ],
     "ReleaseDate": "2024-06-18T00:00:00",
     "Image": "jade.png",
@@ -905,7 +905,7 @@
   },
   {
     "Keys": [
-      "yunli"
+      "Yunli"
     ],
     "ReleaseDate": "2024-07-31T00:00:00",
     "Image": "yunli.png",
@@ -922,7 +922,7 @@
   },
   {
     "Keys": [
-      "jiaoqiu"
+      "Jiaoqiu"
     ],
     "ReleaseDate": "2024-08-21T00:00:00",
     "Image": "jiaoqiu.png",
@@ -939,7 +939,7 @@
   },
   {
     "Keys": [
-      "feixiao"
+      "Feixiao"
     ],
     "ReleaseDate": "2024-09-10T00:00:00",
     "Image": "feixiao.png",
@@ -964,7 +964,7 @@
     "Element": "Fire",
     "Class": "Abundance",
     "Region": [
-      "The Xianzhou Luofo"
+      "The Xianzhou Luofu"
     ],
     "ModFilesName": "Lingsha",
     "InGameSkins": [],
@@ -990,8 +990,7 @@
   },
   {
     "Keys": [
-      "Rappa",
-      "AK-A-3"
+      "Rappa"
     ],
     "ReleaseDate": "2024-10-23T00:00:00",
     "Image": "Rappa.png",
@@ -1127,7 +1126,7 @@
   },
   {
     "Keys": [
-      "anaxa"
+      "Anaxa"
     ],
     "ReleaseDate": "2025-04-30T00:00:00",
     "Image": "anaxa.png",
@@ -1146,7 +1145,7 @@
     "Keys": [
       "Hyacine"
     ],
-    "ReleaseDate": "2025-03-21T00:00:00",
+    "ReleaseDate": "2025-05-21T00:00:00",
     "Image": "hyacine.png",
     "Rarity": 5,
     "Element": "Wind",
@@ -1197,7 +1196,7 @@
     "Keys": [
       "Saber"
     ],
-    "ReleaseDate": "2025-07-11T00:00:00",
+    "ReleaseDate": "2025-07-02T00:00:00",
     "Image": "saber.png",
     "Rarity": 5,
     "Element": "Wind",
@@ -1214,7 +1213,7 @@
     "Keys": [
       "Archer"
     ],
-    "ReleaseDate": "2025-07-11T00:00:00",
+    "ReleaseDate": "2025-07-02T00:00:00",
     "Image": "archer.png",
     "Rarity": 5,
     "Element": "Quantum",
@@ -1231,7 +1230,7 @@
     "Keys": [
       "Cerydra"
     ],
-    "ReleaseDate": "2025-08-02T00:00:00",
+    "ReleaseDate": "2025-08-13T00:00:00",
     "Image": "cerydra.png",
     "Rarity": 5,
     "Element": "Wind",
@@ -1248,7 +1247,7 @@
     "Keys": [
       "Hysilens"
     ],
-    "ReleaseDate": "2025-08-16T00:00:00",
+    "ReleaseDate": "2025-08-13T00:00:00",
     "Image": "hysilens.png",
     "Rarity": 5,
     "Element": "Physical",
@@ -1277,6 +1276,23 @@
     "InGameSkins": [],
     "InternalName": "Evernight",
     "DisplayName": "Evernight"
+  },
+  {
+    "Keys": [
+      "Dan Heng • Permansor Terrae"
+    ],
+    "ReleaseDate": "2025-09-24T00:00:00",
+    "Image": "DHPT.png",
+    "Rarity": 5,
+    "Element": "Physical",
+    "Class": "Preservation",
+    "Region": [
+      "Amphoreus"
+    ],
+    "ModFilesName": "Dan Heng PT",
+    "InGameSkins": [],
+    "InternalName": "Dan Heng PT",
+    "DisplayName": "Dan Heng • Permansor Terrae"
   },
   {
     "Keys": [
@@ -1311,5 +1327,226 @@
     "InGameSkins": [],
     "InternalName": "Dahlia",
     "DisplayName": "The Dahlia"
+  },
+  {
+    "Keys": [
+      "Yao Guang"
+    ],
+    "ReleaseDate": "2026-02-13T00:00:00",
+    "Image": "yaoguang.png",
+    "Rarity": 5,
+    "Element": "Physical",
+    "Class": "Elation",
+    "Region": [
+      "The Xianzhou Yuque"
+    ],
+    "ModFilesName": "Yao Guang",
+    "InGameSkins": [],
+    "InternalName": "Yao Guang",
+    "DisplayName": "Yao Guang"
+  },
+  {
+    "Keys": [
+      "Sparxie"
+    ],
+    "ReleaseDate": "2026-02-13T00:00:00",
+    "Image": "sparxie.png",
+    "Rarity": 5,
+    "Element": "Fire",
+    "Class": "Elation",
+    "Region": [
+      "Planarcadia"
+    ],
+    "ModFilesName": "Sparxie",
+    "InGameSkins": [],
+    "InternalName": "Sparxie",
+    "DisplayName": "Sparxie"
+  },
+  {
+    "Keys": [
+      "Ashveil"
+    ],
+    "ReleaseDate": "2026-03-25T00:00:00",
+    "Image": "ashveil.png",
+    "Rarity": 5,
+    "Element": "Lightning",
+    "Class": "Hunt",
+    "Region": [
+      "Planarcadia"
+    ],
+    "ModFilesName": "Ashveil",
+    "InGameSkins": [],
+    "InternalName": "Ashveil",
+    "DisplayName": "Ashveil"
+  },
+  {
+    "Keys": [
+      "Silver Wolf LV.999"
+    ],
+    "ReleaseDate": "2026-04-22T00:00:00",
+    "Image": "swlv999.png",
+    "Rarity": 5,
+    "Element": "Imaginary",
+    "Class": "Elation",
+    "Region": [
+      "Punklorde"
+    ],
+    "ModFilesName": "Silver Wolf LV.999",
+    "InGameSkins": [],
+    "InternalName": "Silver Wolf LV.999",
+    "DisplayName": "Silver Wolf LV.999"
+  },
+  {
+    "Keys": [
+      "Evanescia"
+    ],
+    "ReleaseDate": "2026-04-22T00:00:00",
+    "Image": "evanescia.png",
+    "Rarity": 5,
+    "Element": "Physical",
+    "Class": "Elation",
+    "Region": [
+      "Planarcadia"
+    ],
+    "ModFilesName": "Evanescia",
+    "InGameSkins": [],
+    "InternalName": "Evanescia",
+    "DisplayName": "Evanescia"
+  },
+  {
+    "Keys": [
+      "Mortenax Blade"
+    ],
+    "ReleaseDate": "2026-06-01T00:00:00",
+    "Image": "mortenaxblade.png",
+    "Rarity": 5,
+    "Element": "Fire",
+    "Class": "Nihility",
+    "Region": [
+      "The Xianzhou Luofu"
+    ],
+    "ModFilesName": "Mortenax Blade",
+    "InGameSkins": [],
+    "InternalName": "Mortenax Blade",
+    "DisplayName": "Mortenax Blade"
+  },
+  {
+    "Keys": [
+      "Himeko • Nova"
+    ],
+    "ReleaseDate": "2026-07-15T00:00:00",
+    "Image": "himekonova.png",
+    "Rarity": 5,
+    "Element": "Fire",
+    "Class": "Erudition",
+    "Region": [
+      "Astral Express"
+    ],
+    "ModFilesName": "Himeko Nova",
+    "InGameSkins": [],
+    "InternalName": "Himeko Nova",
+    "DisplayName": "Himeko • Nova"
+  },
+  {
+    "Keys": [
+      "Rin Tohsaka"
+    ],
+    "ReleaseDate": "2026-07-15T00:00:00",
+    "Image": "rintohsaka.png",
+    "Rarity": 5,
+    "Element": "Quantum",
+    "Class": "Erudition",
+    "Region": [
+      "Other"
+    ],
+    "ModFilesName": "Rin Tohsaka",
+    "InGameSkins": [],
+    "InternalName": "Rin Tohsaka",
+    "DisplayName": "Rin Tohsaka"
+  },
+  {
+    "Keys": [
+      "Gilgamesh"
+    ],
+    "ReleaseDate": "2026-07-15T00:00:00",
+    "Image": "gilgamesh.png",
+    "Rarity": 5,
+    "Element": "Lightning",
+    "Class": "Destruction",
+    "Region": [
+      "Other"
+    ],
+    "ModFilesName": "Gilgamesh",
+    "InGameSkins": [],
+    "InternalName": "Gilgamesh",
+    "DisplayName": "Gilgamesh"
+  },
+  {
+    "Keys": [
+      "Robin • Summeretto"
+    ],
+    "ReleaseDate": "2026-08-26T00:00:00",
+    "Image": "robinsummer.png",
+    "Rarity": 5,
+    "Element": "Wind",
+    "Class": "Remembrance",
+    "Region": [
+      "Penacony"
+    ],
+    "ModFilesName": "Robin Summeretto",
+    "InGameSkins": [],
+    "InternalName": "Robin Summeretto",
+    "DisplayName": "Robin • Summeretto"
+  },
+  {
+    "Keys": [
+      "Aventurine • Waveflair"
+    ],
+    "ReleaseDate": "2026-08-26T00:00:00",
+    "Image": "aventurineflair.png",
+    "Rarity": 5,
+    "Element": "Quantum",
+    "Class": "Elation",
+    "Region": [
+      "IPC"
+    ],
+    "ModFilesName": "Aventurine Waveflair",
+    "InGameSkins": [],
+    "InternalName": "Aventurine Waveflair",
+    "DisplayName": "Aventurine • Waveflair"
+  },
+  {
+    "Keys": [
+      "Pearl"
+    ],
+    "ReleaseDate": "2026-09-28T00:00:00",
+    "Image": "pearl.png",
+    "Rarity": 5,
+    "Element": "Ice",
+    "Class": "Elation",
+    "Region": [
+      "IPC"
+    ],
+    "ModFilesName": "Pearl",
+    "InGameSkins": [],
+    "InternalName": "Pearl",
+    "DisplayName": "Pearl"
+  },
+  {
+    "Keys": [
+      "Aha"
+    ],
+    "ReleaseDate": "2026-11-11T00:00:00",
+    "Image": "aha.png",
+    "Rarity": 5,
+    "Element": "Quantum",
+    "Class": "Elation",
+    "Region": [
+      "Cosmic"
+    ],
+    "ModFilesName": "Aha",
+    "InGameSkins": [],
+    "InternalName": "Aha",
+    "DisplayName": "Aha"
   }
 ]

@@ -234,6 +234,14 @@
                 CornerRadius="8"
                 Orientation="Horizontal">
                 <CommandBar DefaultLabelPosition="Right" IsOpen="False">
+                    <AppBarButton
+                        Command="{x:Bind ViewModel.UpdateAllModsCommand}"
+                        Label="Update all mods"
+                        ToolTipService.ToolTip="Install every mod update found on GameBanana, replacing the old versions">
+                        <AppBarButton.Icon>
+                            <FontIcon Glyph="&#xE895;" />
+                        </AppBarButton.Icon>
+                    </AppBarButton>
                     <AppBarButton Label="Mod Presets">
                         <AppBarButton.Icon>
                             <FontIcon Glyph="&#xEA41;" />

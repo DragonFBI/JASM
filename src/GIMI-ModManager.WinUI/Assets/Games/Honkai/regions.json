@@ -1,4 +1,4 @@
-[
+﻿[
   {
     "InternalName": "Astral Express",
     "DisplayName": "Astral Express"
@@ -48,7 +48,19 @@
     "DisplayName": "Amphoreus"
   },
   {
+    "InternalName": "Planarcadia",
+    "DisplayName": "Planarcadia"
+  },
+  {
+    "InternalName": "The Xianzhou Yuque",
+    "DisplayName": "The Xianzhou Yuque"
+  },
+  {
     "InternalName": "Annihilation",
-    "DisplayName": "Annihilation Gang"
+    "DisplayName": "Annihilation"
+  },
+  {
+    "InternalName": "Other",
+    "DisplayName": "Other"
   }
 ]

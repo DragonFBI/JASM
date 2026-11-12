@@ -10,9 +10,11 @@ using CommunityToolkit.Mvvm.Input;
 using CommunityToolkitWrapper;
 using GIMI_ModManager.Core.Contracts.Entities;
 using GIMI_ModManager.Core.Contracts.Services;
+using GIMI_ModManager.Core.Entities;
 using GIMI_ModManager.Core.Entities.Mods.Helpers;
 using GIMI_ModManager.Core.GamesService.Interfaces;
 using GIMI_ModManager.Core.Helpers;
+using GIMI_ModManager.Core.Services.GameBanana;
 using GIMI_ModManager.Core.Services.GameBanana.Models;
 using GIMI_ModManager.Core.Services.ModPresetService;
 using GIMI_ModManager.Core.Services.ModPresetService.Models;
@@ -252,7 +254,7 @@ public partial class ModInstallerVM : ObservableRecipient, INavigationAware, IDi
                 dispatcherQueue.TryEnqueue(() => { ModUrl = options.ModUrl.ToString(); });
         }).ConfigureAwait(false);
 
-        if (_installOptions?.AutoAdd == true && _installOptions.ExistingModIdToUpdate is null && rootFolderFound)
+        if (_installOptions?.AutoAdd == true && rootFolderFound)
             _ = Task.Run(AutoAddWhenReadyAsync);
     }
 
@@ -290,14 +292,69 @@ public partial class ModInstallerVM : ObservableRecipient, INavigationAware, IDi
 
             await dispatcherQueue.EnqueueAsync(async () =>
             {
-                if (canAddMod())
-                    await AddModAsync();
+                if (!canAddMod())
+                    return;
+
+                // Same GameBanana mod already installed for this character? Treat this as an update:
+                // replace the old version (and its place in presets) instead of asking.
+                var oldVersion = FindInstalledVersionOfSameMod();
+                if (oldVersion is not null)
+                {
+                    _duplicateMod = oldVersion.Mod;
+                    ModFolderName = _modInstallation.ModFolder.Name;
+                    ReplaceDuplicateModInPreset = true;
+                    ReplaceModToUpdateInPreset = false;
+                    if (oldVersion.IsEnabled && !_characterModList.Character.IsMultiMod)
+                        EnableThisMod = true;
+
+                    await AddModAndReplaceAsync();
+                    return;
+                }
+
+                await AddModAsync();
             }).ConfigureAwait(false);
         }
         catch (Exception e)
         {
             _logger.Error(e, "Failed to automatically add mod");
         }
+    }
+
+    /// <summary>
+    /// Finds a mod in this character's list that was installed from the same GameBanana mod page.
+    /// </summary>
+    private CharacterSkinEntry? FindInstalledVersionOfSameMod()
+    {
+        // When updating a specific mod (e.g. "Update all mods"), that mod is the old version
+        if (_existingModToUpdate is not null)
+        {
+            var toUpdate = _characterModList.Mods.FirstOrDefault(m => m.Id == _existingModToUpdate.Id);
+            if (toUpdate is not null)
+                return toUpdate;
+        }
+
+        if (!Uri.TryCreate(ModUrl, UriKind.Absolute, out var newUrl) ||
+            !GameBananaUrlHelper.TryGetModIdFromUrl(newUrl, out var newModId))
+            return null;
+
+        foreach (var entry in _characterModList.Mods)
+        {
+            try
+            {
+                if (!entry.Mod.Settings.TryGetSettings(out var settings) || settings.ModUrl is null)
+                    continue;
+
+                if (GameBananaUrlHelper.TryGetModIdFromUrl(settings.ModUrl, out var oldModId) &&
+                    oldModId == newModId)
+                    return entry;
+            }
+            catch (Exception e)
+            {
+                _logger.Warning(e, "Could not read settings for mod {ModName}", entry.Mod.Name);
+            }
+        }
+
+        return null;
     }
 
     private async void OnPropertyChanged(object? sender, PropertyChangedEventArgs e)

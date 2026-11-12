@@ -155,7 +155,7 @@ public partial class ModPageVM : ObservableRecipient
         if (file.Status == ModFileInfoVm.InstallStatus.Downloaded && CanInstall(file))
             await StartInstall(file);
 
-        if (file.Status == ModFileInfoVm.InstallStatus.Installed)
+        if (file.Status == ModFileInfoVm.InstallStatus.Installed && !_ct.IsCancellationRequested)
             _window.Close();
     }
 

@@ -19,6 +19,7 @@ using GIMI_ModManager.WinUI.Models;
 using GIMI_ModManager.WinUI.Models.Settings;
 using GIMI_ModManager.WinUI.Models.ViewModels;
 using GIMI_ModManager.WinUI.Services;
+using GIMI_ModManager.WinUI.Services.AppManagement;
 using GIMI_ModManager.WinUI.Services.ModHandling;
 using GIMI_ModManager.WinUI.Services.Notifications;
 using GIMI_ModManager.WinUI.ViewModels.CharacterDetailsViewModels;
@@ -1046,13 +1047,81 @@ public partial class CharactersViewModel : ObservableRecipient, INavigationAware
     }
 
 
+    [ObservableProperty]
+    [NotifyCanExecuteChangedFor(nameof(UpdateAllModsCommand))]
+    private bool _isUpdatingAllMods;
+
+    private bool CanUpdateAllMods() => !IsUpdatingAllMods;
+
+    /// <summary>
+    /// Installs every mod update JASM has found on GameBanana, one after another,
+    /// replacing the old versions. Uses the same automatic install as drag and drop.
+    /// </summary>
+    [RelayCommand(CanExecute = nameof(CanUpdateAllMods))]
+    private async Task UpdateAllModsAsync()
+    {
+        var notificationManager = NotificationManager;
+        IsUpdatingAllMods = true;
+        try
+        {
+            var updates = (await _modNotificationManager.GetNotificationsAsync())
+                .Where(n => n.AttentionType == AttentionType.UpdateAvailable && n.ModsRetrievedResult is not null)
+                .GroupBy(n => n.ModId)
+                .Select(g => g.First())
+                .ToList();
+
+            if (updates.Count == 0)
+            {
+                notificationManager.ShowNotification("No mod updates found",
+                    "There are no mod updates waiting. Use \"Check for updates\" on a character first.",
+                    TimeSpan.FromSeconds(6));
+                return;
+            }
+
+            var windowManager = App.GetService<IWindowManagerService>();
+            var processed = 0;
+            foreach (var update in updates)
+            {
+                if (windowManager.GetWindow(update.Id) is not null)
+                    continue;
+
+                var closed = new TaskCompletionSource();
+                var window = new GIMI_ModManager.WinUI.Views.ModUpdateAvailableWindow(update.Id, autoInstall: true)
+                {
+                    Title = $"Updating mod {processed + 1} of {updates.Count}: {update.ModCustomName}"
+                };
+                window.Closed += (_, _) => closed.TrySetResult();
+                windowManager.CreateWindow(window, identifier: update.Id);
+
+                await closed.Task;
+                processed++;
+            }
+
+            notificationManager.ShowNotification("Mod updates finished",
+                $"Went through {processed} of {updates.Count} mod updates.", TimeSpan.FromSeconds(6));
+        }
+        catch (Exception e)
+        {
+            _logger.Error(e, "Failed to update all mods");
+            notificationManager.ShowNotification("Updating all mods failed", e.Message, TimeSpan.FromSeconds(10));
+        }
+        finally
+        {
+            IsUpdatingAllMods = false;
+        }
+    }
+
     private void InitializeSorters()
     {
-        var lastCharacters = new List<CharacterGridItemModel>
-        {
-            FindCharacterByInternalName(_gameService.GlidersCharacterInternalName)!,
-            FindCharacterByInternalName(_gameService.WeaponsCharacterInternalName)!
-        };
+        // Gliders may not exist (only added for Genshin), so skip any that aren't there
+        var lastCharacters = new[]
+            {
+                FindCharacterByInternalName(_gameService.GlidersCharacterInternalName),
+                FindCharacterByInternalName(_gameService.WeaponsCharacterInternalName)
+            }
+            .Where(c => c is not null)
+            .Select(c => c!)
+            .ToList();
 
         var othersCharacter = _backendCharacters.FirstOrDefault(ch =>
             ch.Character.InternalName.Id.Contains("Others", StringComparison.OrdinalIgnoreCase));

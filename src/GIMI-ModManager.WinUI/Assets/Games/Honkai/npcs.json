@@ -1,4 +1,4 @@
-[
+﻿[
   {
     "InternalName": "Others_NPC",
     "DisplayName": "Others",
@@ -20,5 +20,12 @@
     "InternalName": "Garmentmaker",
     "DisplayName": "Garmentmaker",
     "Image": "Garmentmaker.png"
+  },
+  {
+    "Keys": [
+      "Entity"
+    ],
+    "InternalName": "Entity",
+    "DisplayName": "Entity"
   }
 ]

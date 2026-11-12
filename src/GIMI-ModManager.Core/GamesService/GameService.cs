@@ -809,7 +809,9 @@ public class GameService : IGameService
 
 
         _characters.Insert(0, getOthersCharacter());
-        _characters.Add(getGlidersCharacter());
+        // Gliders only exist in Genshin, so the built-in Gliders entry is only added there
+        if (GameShortName.Equals("Genshin", StringComparison.OrdinalIgnoreCase))
+            _characters.Add(getGlidersCharacter());
         _characters.Add(getWeaponsCharacter());
 
         if (LanguageOverrideAvailable())

@@ -1,6 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using CommunityToolkitWrapper;
 using GIMI_ModManager.Core.Contracts.Entities;
 using GIMI_ModManager.Core.Contracts.Services;
 using GIMI_ModManager.Core.Entities.Mods.Exceptions;
@@ -59,8 +60,13 @@ public partial class ModUpdateVM : ObservableRecipient
     public readonly ObservableCollection<ModFileInfoVm> ModFileInfos = new();
     private readonly ILogger _logger = App.GetService<ILogger>().ForContext<ModUpdateVM>();
 
-    public ModUpdateVM(Guid notificationId, WindowEx window, CancellationToken ctsToken)
+    private readonly bool _autoInstall;
+    private bool _windowClosed;
+
+    public ModUpdateVM(Guid notificationId, WindowEx window, CancellationToken ctsToken, bool autoInstall = false)
     {
+        _autoInstall = autoInstall;
+        window.Closed += (_, _) => _windowClosed = true;
         _dispatcherQueue = DispatcherQueue.GetForCurrentThread();
         _notificationId = notificationId;
         _window = window;
@@ -74,6 +80,8 @@ public partial class ModUpdateVM : ObservableRecipient
         {
             await InternalInitialize();
             Initializing = "false";
+            if (_autoInstall && !_windowClosed)
+                await AutoInstallAsync();
         }
         catch (OperationCanceledException e)
         {
@@ -158,6 +166,34 @@ public partial class ModUpdateVM : ObservableRecipient
         }
 
         IsWindowBusy = false;
+    }
+
+    /// <summary>
+    /// Used by "Update all mods": downloads the newest file, installs it over the old version
+    /// and closes this window when done.
+    /// </summary>
+    private async Task AutoInstallAsync()
+    {
+        if (_ct.IsCancellationRequested || ModFileInfos.Count == 0)
+        {
+            if (!_windowClosed)
+                _window.Close();
+            return;
+        }
+
+        var file = ModFileInfos.OrderByDescending(f => f.DateAdded).First();
+
+        // Let the pending UI updates from initialization finish first
+        await _dispatcherQueue.EnqueueAsync(() => true);
+
+        if (file.Status == ModFileInfoVm.InstallStatus.NotStarted && CanStartDownload(file))
+            await StartDownload(file);
+
+        if (file.Status == ModFileInfoVm.InstallStatus.Downloaded && CanInstall(file))
+            await StartInstall(file);
+
+        if (!_windowClosed)
+            _window.Close();
     }
 
     private async Task LogErrorAndClose(Exception e, bool removeNotification = true)
@@ -325,6 +361,7 @@ public partial class ModUpdateVM : ObservableRecipient
                     {
                         options.ModUrl = modUrl;
                         options.ExistingModIdToUpdate = _notification?.ModId;
+                        options.AutoAdd = _autoInstall;
                     }).ConfigureAwait(false);
 
                 return await task.WaitForCloseAsync(_ct).ConfigureAwait(false);
